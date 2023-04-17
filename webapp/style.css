@@ -1,0 +1,190 @@
+/* Import Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
+}
+.main {
+  width: 100%;
+  height: 85vh;
+  /* object-fit: cover; */
+  position: absolute;
+  background: url("https://img.freepik.com/fotos-gratis/hotel-em-nevada-eua_1268-14393.jpg?w=1380&t=st=1681769317~exp=1681769917~hmac=c12e56acc75049c502f8c60d322d8fb31ee8aa3c34f6a9b6ed8b5ae1b47edf49");
+  background-repeat: none;
+  background-size: cover;
+  backdrop-filter: blur(40px);
+  filter: brightness(45%);
+  place-items: center;
+}
+.texto {
+  position: absolute;
+  color: white;
+  font-size: 1.4rem;
+  width: 100%;
+
+  height: 20vh;
+  margin-top: 15%;
+
+  text-transform: uppercase;
+  text-align: center;
+}
+h1 {
+  margin-bottom: 6%;
+}
+.btn {
+  padding: 30px;
+  background-color: blue;
+  margin-top: 20px;
+  list-style: none;
+  text-decoration: none;
+  border-radius: 10px;
+  color: white;
+}
+#btn2 {
+  background-color: red;
+  margin-left: 44%;
+  padding: 30px 90px;
+  margin-top: 30%;
+  border-radius: 40px;
+}
+.btn_veja {
+  width: 100%;
+  height: 20vh;
+}
+.text {
+  width: 50%;
+  font-size: 1.2rem;
+  margin: auto;
+  margin-bottom: 5vh;
+}
+.btn:hover {
+  background-color: white;
+  color: blue;
+  font-weight: 800;
+}
+.container {
+  display: flex;
+  padding: 0 35px;
+  min-height: 100vh;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  display: flex;
+  max-width: 1200px;
+  margin-top: 100vh;
+  position: relative;
+  margin-bottom: 10vh;
+}
+
+.wrapper i {
+  top: 50%;
+
+  height: 44px;
+  width: 44px;
+  color: white;
+  cursor: pointer;
+  font-size: 1.5rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  text-align: center;
+  line-height: 44px;
+  background: #343f4f;
+  border-radius: 50%;
+  /* transform: translateY(-50%);
+  transition: transform 0.1s linear; */
+}
+
+/* .wrapper i:active {
+  transform: translateY(-50%) scale(0.9);
+} */
+
+.wrapper i:hover {
+  background: #010102;
+  color: white;
+}
+
+.wrapper i:first-child {
+  left: -92px;
+}
+
+.wrapper i:last-child {
+  right: -92px;
+}
+
+.wrapper .carousel {
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+}
+
+.carousel.dragging {
+  cursor: grab;
+  scroll-behavior: auto;
+}
+
+.carousel.dragging img {
+  pointer-events: none;
+}
+#btn2:hover {
+  color: red;
+  background-color: white;
+  border: 2px solid red;
+}
+
+.carousel img {
+  height: 340px;
+  object-fit: cover;
+  user-select: none;
+  margin-left: 14px;
+  width: calc(100% / 3);
+  border-radius: 20px;
+}
+.carousel {
+  padding: 30px;
+}
+.carousel img:first-child {
+  margin-left: 30px;
+}
+.carousel img:last-child {
+  margin-right: -110px;
+}
+
+@media screen and (max-width: 900px) {
+  .wrapper {
+    width: 75%;
+  }
+  .carousel img {
+    width: calc(100% / 1);
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .carousel img {
+    width: 100%;
+    background-color: red;
+  }
+  .btn_veja {
+    width: 100%;
+    height: 20vh;
+  }
+  .text {
+    width: 90%;
+  }
+  #btn2 {
+    position: absolute;
+    margin-top: 1vh;
+    padding: 20px 100px;
+    margin-left: 15%;
+    background-color: #010102;
+  }
+}

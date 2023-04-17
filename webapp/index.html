@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - youtube.com/codingnepal -->
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Draggable Image Slider | CodingNepal</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <section class="main">
+
+
+
+    </section>
+    <div class="texto">
+        <h1>Encontre os melhores hoteis a um clique de distância!</h1>
+        <a class="btn" href="#wrapper">COMECE SUA EXPERIÊNCIA</a>
+    </div>
+
+    <div class="container">
+        <div id="wrapper" class="wrapper">
+            <i id="left" class="fa-solid fa-angle-left"></i>
+            <div class="carousel">
+                <img src="https://www.carimboepassaporte.com.br/wp-content/uploads/2022/08/onde-ficar-em-sao-paulo-hospedagem.jpg"
+                    alt="img" draggable="false">
+                <img src="https://e1.pxfuel.com/desktop-wallpaper/993/470/desktop-wallpaper-hotel-hilton-sao-paulo-morumbi-sao-paulo-brazil-morumbi.jpg"
+                    alt="img" draggable="false">
+                <img src="https://www.hoteisdeluxobrasil.com.br/wp-content/uploads/2020/11/caapa-1.jpg" alt="img"
+                    draggable="false">
+                <img src="https://pousadastop.com.br/photospousadas/villasape/3.jpg" alt="img" draggable="false">
+                <img src="https://www.kayak.com.br/rimg/himg/d0/cc/90/ice-49892-72907433_3XL-105998.jpg?width=1366&height=768&crop=true"
+                    alt="img" draggable="false">
+                <img src="https://passageirodeprimeira.com/wp-content/uploads/2021/01/passageirodeprimeira.com-como-e-se-hospedar-nogrand-mercure-sp-itaim-bibi-flagship-da-marca-na-america-do-sul-grand-mercure.png"
+                    alt="img" draggable="false">
+                <img src="https://www.pacoteshyatt.com.br/sao-paulo/wp-content/uploads/sites/3/2021/02/Co%CC%81pia-de-Co%CC%81pia-de-Club-View.jpg"
+                    alt="img" draggable="false">
+                <img src="https://z.cdrst.com/foto/hotel-sf/12e1d/granderesp/mercure-sao-paulo-pinheiros-hotel-banio-b57295d.jpg"
+                    alt="img" draggable="false">
+                <img src="https://cdn2.revistahoteis.com.br/wp-content/uploads/2017/07/Foto-1-Fachada.jpg" alt="img"
+                    draggable="false">
+            </div>
+            <i id="right" class="fa-solid fa-angle-right"></i>
+        </div>
+
+    </div>
+    <div class="btn_veja">
+        <div class="text">
+            <p>
+                Nós entendemos que cada viagem é única e que a escolha do hotel pode ser um dos fatores mais importantes
+                para garantir o
+                sucesso da sua experiência. Por isso, nós selecionamos cuidadosamente uma lista exclusiva de hotéis, com
+                uma ampla gama
+                de opções que atendem às necessidades dos mais diversos tipos de viajantes.
+
+                No nosso site, você encontrará uma variedade de hotéis que oferecem o máximo de conforto, qualidade e
+                conveniência.
+                Temos hotéis de luxo para quem busca uma experiência sofisticada, hotéis para famílias que prezam por
+                opções seguras e
+                divertidas, hotéis mais econômicos para quem busca um excelente custo-benefício, e muitas outras opções.
+            </p>
+        </div>
+
+        <a class="btn" id="btn2" href="main">VEJA DETALHES</a>
+    </div>
+
+</body>
+
+<script>const carousel = document.querySelector(".carousel"),
+        firstImg = carousel.querySelectorAll("img")[0],
+        arrowIcons = document.querySelectorAll(".wrapper i");
+
+    let isDragStart = false, isDragging = false, prevPageX, prevScrollLeft, positionDiff;
+
+    const showHideIcons = () => {
+        // showing and hiding prev/next icon according to carousel scroll left value
+        let scrollWidth = carousel.scrollWidth - carousel.clientWidth; // getting max scrollable width
+        arrowIcons[0].style.display = carousel.scrollLeft == 0 ? "none" : "block";
+        arrowIcons[1].style.display = carousel.scrollLeft == scrollWidth ? "none" : "block";
+    }
+
+    arrowIcons.forEach(icon => {
+        icon.addEventListener("click", () => {
+            let firstImgWidth = firstImg.clientWidth + 14; // getting first img width & adding 14 margin value
+            // if clicked icon is left, reduce width value from the carousel scroll left else add to it
+            carousel.scrollLeft += icon.id == "left" ? -firstImgWidth : firstImgWidth;
+            setTimeout(() => showHideIcons(), 60); // calling showHideIcons after 60ms
+        });
+    });
+
+    const autoSlide = () => {
+        // if there is no image left to scroll then return from here
+        if (carousel.scrollLeft - (carousel.scrollWidth - carousel.clientWidth) > -1 || carousel.scrollLeft <= 0) return;
+
+        positionDiff = Math.abs(positionDiff); // making positionDiff value to positive
+        let firstImgWidth = firstImg.clientWidth + 14;
+        // getting difference value that needs to add or reduce from carousel left to take middle img center
+        let valDifference = firstImgWidth - positionDiff;
+
+        if (carousel.scrollLeft > prevScrollLeft) { // if user is scrolling to the right
+            return carousel.scrollLeft += positionDiff > firstImgWidth / 3 ? valDifference : -positionDiff;
+        }
+        // if user is scrolling to the left
+        carousel.scrollLeft -= positionDiff > firstImgWidth / 3 ? valDifference : -positionDiff;
+    }
+
+    const dragStart = (e) => {
+        // updatating global variables value on mouse down event
+        isDragStart = true;
+        prevPageX = e.pageX || e.touches[0].pageX;
+        prevScrollLeft = carousel.scrollLeft;
+    }
+
+    const dragging = (e) => {
+        // scrolling images/carousel to left according to mouse pointer
+        if (!isDragStart) return;
+        e.preventDefault();
+        isDragging = true;
+        carousel.classList.add("dragging");
+        positionDiff = (e.pageX || e.touches[0].pageX) - prevPageX;
+        carousel.scrollLeft = prevScrollLeft - positionDiff;
+        showHideIcons();
+    }
+
+    const dragStop = () => {
+        isDragStart = false;
+        carousel.classList.remove("dragging");
+
+        if (!isDragging) return;
+        isDragging = false;
+        autoSlide();
+    }
+
+    carousel.addEventListener("mousedown", dragStart);
+    carousel.addEventListener("touchstart", dragStart);
+
+    document.addEventListener("mousemove", dragging);
+    carousel.addEventListener("touchmove", dragging);
+
+    document.addEventListener("mouseup", dragStop);
+    carousel.addEventListener("touchend", dragStop);</script>
+
+</html>
